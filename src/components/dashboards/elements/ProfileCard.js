@@ -133,6 +133,18 @@ const EditIcon = styled(FaPlusCircle)`
   left: 50px;
   background-color: #fff;
   border-radius: 50%;
+  filter: drop-shadow(2px 2px 2px #333);
+  transition: all 200ms ease-in-out;
+
+  &:hover {
+    cursor: pointer;
+    filter: drop-shadow(0 0 0 #fff);
+    background-color: #5fff3e;
+    width: 30px;
+    height: 30px;
+    top: 55px;
+    left: 45px;
+  }
 `;
 
 const InfoTag = styled.div`
@@ -188,4 +200,17 @@ const DelBtn = styled(FaRegTimesCircle)`
   left: 50px;
   background-color: peachpuff;
   border-radius: 50%;
+  filter: drop-shadow(2px 2px 2px #333);
+  transition: all 200ms ease-in-out;
+
+  &:hover {
+    cursor: pointer;
+    filter: drop-shadow(0 0 0 #fff);
+    background-color: #e62d00;
+    color: #fff;
+    width: 30px;
+    height: 30px;
+    top: 55px;
+    left: 45px;
+  }
 `;
