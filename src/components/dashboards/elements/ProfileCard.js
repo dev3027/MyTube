@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaPencilAlt } from 'react-icons/fa';
+import { FaPencilAlt, FaRegTimesCircle, FaPlusCircle } from 'react-icons/fa';
 import styled from 'styled-components';
 import ProgressBar from './ProgressBar';
 import { imgStore, db } from '../../../firebase/config';
@@ -49,17 +49,27 @@ const ProfileCard = () => {
         <form>
           <PortfolioUpper>
             {!docs.length ? (
-              <img
-                src='/images/Ellipse60.png'
-                alt='portfolio p n g at 200 pix by 200 pix'
-              />
+              <>
+                <DefaultImg
+                  src='/images/Ellipse60.png'
+                  alt='portfolio p n g at 200 pix by 200 pix'
+                />
+                {!showDiv && !upload && (
+                  <EditIcon
+                    onClick={() => {
+                      setUpload(true);
+                      setShowDiv(true);
+                    }}
+                  />
+                )}
+              </>
             ) : (
               <>
-                <img
+                <UploadImg
                   src={docs[0].url}
                   alt='portfolio p n g at 200 pix by 200 pix'
                 />
-                <DelBtn onClick={deleteFile}>X</DelBtn>
+                <DelBtn onClick={deleteFile} />
               </>
             )}
 
@@ -70,34 +80,9 @@ const ProfileCard = () => {
           </PortfolioUpper>
           <PortfolioLower>
             <InputInfo>
-              {!showDiv && !upload && (
-                <>
-                  <FaPencilAlt
-                    onClick={() => {
-                      setUpload(true);
-                      setShowDiv(true);
-                    }}
-                  />
-                  &nbsp;
-                  <span
-                    onClick={() => {
-                      setUpload(true);
-                      setShowDiv(true);
-                    }}>
-                    Upload
-                  </span>
-                </>
-              )}
-
               {upload && (
                 <>
                   <UploadBgOutput>
-                    {!showDiv ? (
-                      <FaPencilAlt onClick={() => setUpload(false)} />
-                    ) : (
-                      <></>
-                    )}
-                    &nbsp;
                     {docs.length >= 1 ? (
                       <h4>Upload Complete</h4>
                     ) : (
@@ -125,10 +110,29 @@ const ProfileCard = () => {
 export default ProfileCard;
 
 const PortfolioInfoDiv = styled.div`
-  border: 1px solid #333;
-  width: 260px;
-  height: 155px;
+  display: flex;
+  position: relative;
+  padding-top: 20px;
   margin-bottom: 5px;
+`;
+
+const DefaultImg = styled.img`
+  position: relative;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+`;
+
+const UploadImg = styled(DefaultImg)``;
+
+const EditIcon = styled(FaPlusCircle)`
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 60px;
+  left: 50px;
+  background-color: #fff;
+  border-radius: 50%;
 `;
 
 const InfoTag = styled.div`
@@ -136,12 +140,12 @@ const InfoTag = styled.div`
   flex-direction: column;
   justify-content: center;
   font-size: 13px;
-  margin-left: 5px;
+  margin-left: 10px;
 `;
 
 const InputInfo = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   cursor: pointer;
   font-size: 13px;
 
@@ -157,19 +161,14 @@ const PortfolioUpper = styled.div`
   padding-top: 5px;
   padding-left: 5px;
   margin-bottom: 5px;
-
-  img {
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-  }
 `;
 
 const PortfolioLower = styled.div`
   display: flex;
   text-align: center;
   justify-content: space-around;
-  height: 100%;
+  width: 100%;
+  height: 50%;
   padding: 5px 0;
 `;
 
@@ -181,14 +180,12 @@ const UploadBgOutput = styled.div`
   align-items: center;
 `;
 
-const DelBtn = styled.button`
-  padding: 5px 7px;
-  border: 1px solid #333;
-  border-radius: 3px;
-  margin: 0 5px;
-
-  &:hover {
-    cursor: pointer;
-    background-color: peachpuff;
-  }
+const DelBtn = styled(FaRegTimesCircle)`
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 60px;
+  left: 50px;
+  background-color: peachpuff;
+  border-radius: 50%;
 `;

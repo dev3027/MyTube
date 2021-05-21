@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import styled from 'styled-components';
 import useStorage from '../../../hooks/useStorage';
 
 function ProgressBar({ file, setFile }) {
@@ -10,7 +11,12 @@ function ProgressBar({ file, setFile }) {
     }
   }, [url, setFile]);
 
-  return <div className='progress-bar' style={{ width: progress + '%' }}></div>;
+  return <LoadingBar style={{ width: progress + '%' }}></LoadingBar>;
 }
 
 export default ProgressBar;
+
+const LoadingBar = styled.div`
+  height: 2px;
+  background-color: purple;
+`;
