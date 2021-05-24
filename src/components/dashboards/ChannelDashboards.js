@@ -1,4 +1,5 @@
 import React from 'react';
+import LogoCard from './elements/LogoCard';
 import ProfileCard from './elements/ProfileCard';
 
 import styled from 'styled-components';
@@ -10,6 +11,7 @@ function ChannelForm() {
         <LeftSection>
           <LeftColumn>
             <h3>Images</h3>
+            <LogoCard />
             <ProfileCard />
           </LeftColumn>
           <RightColumn></RightColumn>
